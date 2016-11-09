@@ -1,2 +1,2 @@
-# sfmc-rest-sdk-java
-SDK for Salesforce Marketing Cloud (ExactTarget) API
+# Salesforce Marketing Cloud (ExactTarget) Java SDK
+We already use [forked version](https://github.com/Smartling/FuelSDK-Java) of the official FuelSDK-Java, but it doesn't have endpoints for the new Content Builder. That was the reason to create a new SDK.
