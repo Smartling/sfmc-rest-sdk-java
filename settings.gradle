@@ -1,4 +1,4 @@
 /*
  * Project build settings.
 */
-rootProject.name = 'sfmc-rest-sdk-sdk'
+rootProject.name = 'sfmc-rest-sdk-java'
