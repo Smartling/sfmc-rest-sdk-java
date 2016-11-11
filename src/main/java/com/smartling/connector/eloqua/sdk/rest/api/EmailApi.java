@@ -1,0 +1,29 @@
+package com.smartling.connector.eloqua.sdk.rest.api;
+
+import com.smartling.connector.eloqua.sdk.data.Elements;
+import com.smartling.connector.eloqua.sdk.data.Email;
+import com.smartling.connector.eloqua.sdk.data.request.GetListRequest;
+import feign.Headers;
+import feign.Param;
+import feign.RequestLine;
+
+public interface EmailApi
+{
+    @RequestLine("POST /asset/v1/content/assets/query/")
+    @Headers ("Content-Type: application/json")
+    Elements<Email> listEmails(GetListRequest body);
+
+    @RequestLine("GET /asset/v1/content/assets/{id}")
+    Email getEmail(@Param("id") String id);
+
+    @RequestLine("POST /asset/v1/assets/")
+    @Headers ("Content-Type: application/json")
+    Email createEmail(Email clonedEmail);
+
+    @RequestLine("PUT /asset/v1/assets/{id}")
+    @Headers ("Content-Type: application/json")
+    Void updateEmail(@Param("id") String id, Email clonedEmail);
+
+    @RequestLine("DELETE /asset/v1/assets/{id}")
+    Void deleteEmail(@Param("id") String id);
+}
