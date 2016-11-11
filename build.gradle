@@ -104,7 +104,7 @@ task prepareSonarConfig(type: Copy) {
 }
 
 def buildVersion() {
-   '1.0.0-SNAPSHOT'
+   '1.0.0'
 }
 
 task wrapper(type: Wrapper) {
