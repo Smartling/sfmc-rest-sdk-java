@@ -5,7 +5,7 @@ public class Views
     private Subjectline subjectline;
     private Object preheader;
     private Html html;
-    private Object text;
+    private Text text;
     private Object viewAsAWebPage;
     private Object subscriptioncenter;
     private Object forwardHTML;
@@ -41,12 +41,12 @@ public class Views
         this.html = html;
     }
 
-    public Object getText()
+    public Text getText()
     {
         return text;
     }
 
-    public void setText(final Object text)
+    public void setText(final Text text)
     {
         this.text = text;
     }
