@@ -2,6 +2,7 @@ package com.smartling.connector.exacttarget.sdk.client;
 
 import com.smartling.connector.exacttarget.sdk.rest.SFMCRestAuthenticationException;
 import com.smartling.connector.exacttarget.sdk.rest.SFMCRestException;
+import com.smartling.connector.exacttarget.sdk.rest.SFMCRestNotFoundException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 import org.slf4j.Logger;
@@ -24,6 +25,12 @@ public class SFCMRestErrorDecoder implements ErrorDecoder
         {
             String message = String.format("Authentication failed with HTTP %s: %s. Details: %s", response.status(), response.reason(), responseBody);
             return new SFMCRestAuthenticationException(message);
+        }
+
+        if (response.status() == 404)
+        {
+            String message = String.format("Authentication failed with HTTP %s: %s. Details: %s", response.status(), response.reason(), responseBody);
+            return new SFMCRestNotFoundException(message);
         }
 
         String message = String.format("Eloqua API responded with HTTP %s: %s. Details: %s", response.status(), response.reason(), responseBody);
