@@ -27,6 +27,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
             assertThat(emails.getItems().get(0).getModifiedDate().after(emails.getItems().get(1).getModifiedDate()));
         }
 
+
         final Email emailToClone = emailClient.getEmail(emails.getItems().get(0).getId());
         emailToClone.setName(emailToClone.getName()+"(1)");
         final Email clonedEmail = emailClient.createEmail(emailToClone);
@@ -35,5 +36,14 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         emailClient.updateEmail(clonedEmail.getId(), clonedEmail);
         assertThat(emailClient.getEmailsList(1, 10, "UnIqUe_Name", "modifiedDate", "DESC").getItems().get(0).getId()).isEqualTo(clonedEmail.getId());
         emailClient.deleteEmail(clonedEmail.getId());
+    }
+
+    @Test
+    public void testGettingFieldWithEmptySorting()
+    {
+        EmailClient emailClient = new EmailClient(configuration);
+        
+        final Elements<Email> emails = emailClient.getEmailsList(1, 10, "", "", "");
+        assertThat(emails).isNotNull();
     }
 }
