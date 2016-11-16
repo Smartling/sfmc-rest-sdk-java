@@ -33,7 +33,7 @@ public abstract class ApiClient
                     .encoder(new JacksonEncoder())
                     .decoder(new JacksonDecoder())
                     .errorDecoder(new SFCMRestErrorDecoder())
-                    .logger(new Logger.JavaLogger().appendToFile("~/http.log"))
+                    .logger(new Logger.JavaLogger().appendToFile("http.log"))
                     .logLevel(Logger.Level.FULL)
                     .options(configuration.getOptions())
                     .target(apiClass, apiBaseUrl);
@@ -46,7 +46,7 @@ public abstract class ApiClient
                     .encoder(new JacksonEncoder())
                     .decoder(new JacksonDecoder())
                     .errorDecoder(new SFCMRestErrorDecoder())
-                    .logger(new Logger.JavaLogger().appendToFile("~/http.log"))
+                    .logger(new Logger.JavaLogger().appendToFile("http.log"))
                     .logLevel(Logger.Level.FULL)
                     .options(configuration.getOptions())
                     .target(apiClass, apiBaseUrl);
