@@ -12,7 +12,7 @@ public interface EmailApi
     @RequestLine("POST /asset/v1/content/assets/query/")
     @Headers ("Content-Type: application/json") Elements<Email> listEmails(GetListRequest body);
 
-    @RequestLine("GET /asset/v1/content/assets/{id}")
+    @RequestLine("GET /asset/v1/assets/{id}")
     Email getEmail(@Param("id") String id);
 
     @RequestLine("POST /asset/v1/assets/")
