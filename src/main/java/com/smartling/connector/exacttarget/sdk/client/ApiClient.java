@@ -6,6 +6,7 @@ import com.smartling.connector.exacttarget.sdk.data.AuthData;
 import com.smartling.connector.exacttarget.sdk.data.TokenInfo;
 import com.smartling.connector.exacttarget.sdk.rest.api.LoginApi;
 import feign.Feign;
+import feign.Logger;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,8 @@ public abstract class ApiClient
                     .encoder(new JacksonEncoder())
                     .decoder(new JacksonDecoder())
                     .errorDecoder(new SFCMRestErrorDecoder())
+                    .logger(new Logger.JavaLogger().appendToFile("~/http.log"))
+                    .logLevel(Logger.Level.FULL)
                     .options(configuration.getOptions())
                     .target(apiClass, apiBaseUrl);
     }
@@ -43,6 +46,8 @@ public abstract class ApiClient
                     .encoder(new JacksonEncoder())
                     .decoder(new JacksonDecoder())
                     .errorDecoder(new SFCMRestErrorDecoder())
+                    .logger(new Logger.JavaLogger().appendToFile("~/http.log"))
+                    .logLevel(Logger.Level.FULL)
                     .options(configuration.getOptions())
                     .target(apiClass, apiBaseUrl);
     }

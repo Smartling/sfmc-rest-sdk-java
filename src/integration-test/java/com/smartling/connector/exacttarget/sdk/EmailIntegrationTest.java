@@ -42,7 +42,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
     public void testGettingFieldWithEmptySorting()
     {
         EmailClient emailClient = new EmailClient(configuration);
-        
+
         final Elements<Email> emails = emailClient.getEmailsList(1, 10, "", "", "");
         assertThat(emails).isNotNull();
     }
