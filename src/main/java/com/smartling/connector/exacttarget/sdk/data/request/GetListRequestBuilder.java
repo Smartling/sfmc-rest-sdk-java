@@ -9,7 +9,7 @@ public class GetListRequestBuilder
 {
     public static GetListRequest build(int page, int pageSize, String searchTerm, String sortField, String sortDirection)
     {
-        return new GetListRequest(new Page(page, pageSize), getQuery(searchTerm), getSort(sortField, sortDirection), "name");
+        return new GetListRequest(new Page(page, pageSize), getQuery(searchTerm), getSort(sortField, sortDirection), "name", "category");
     }
 
     private static List<Sort> getSort(final String sortField, final String sortDirection)
