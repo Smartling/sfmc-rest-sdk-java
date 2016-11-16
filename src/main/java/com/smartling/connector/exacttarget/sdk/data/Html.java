@@ -5,6 +5,7 @@ public class Html
     private Object options;
     private String content;
     private Integer modelVersion;
+    private String thumbnailHtml;
 
     public Object getOptions()
     {
@@ -34,5 +35,15 @@ public class Html
     public void setModelVersion(final Integer modelVersion)
     {
         this.modelVersion = modelVersion;
+    }
+
+    public String getThumbnailHtml()
+    {
+        return thumbnailHtml;
+    }
+
+    public void setThumbnailHtml(final String thumbnailHtml)
+    {
+        this.thumbnailHtml = thumbnailHtml;
     }
 }
