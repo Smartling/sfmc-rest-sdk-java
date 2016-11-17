@@ -6,6 +6,7 @@ public class Html
     private String content;
     private Integer modelVersion;
     private String thumbnailHtml;
+    private Template template;
 
     public Object getOptions()
     {
@@ -45,5 +46,15 @@ public class Html
     public void setThumbnailHtml(final String thumbnailHtml)
     {
         this.thumbnailHtml = thumbnailHtml;
+    }
+
+    public Template getTemplate()
+    {
+        return template;
+    }
+
+    public void setTemplate(final Template template)
+    {
+        this.template = template;
     }
 }
