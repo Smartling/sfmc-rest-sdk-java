@@ -7,6 +7,7 @@ public class Html
     private Integer modelVersion;
     private String thumbnailHtml;
     private Template template;
+    private Object slots;
 
     public Object getOptions()
     {
@@ -56,5 +57,15 @@ public class Html
     public void setTemplate(final Template template)
     {
         this.template = template;
+    }
+
+    public Object getSlots()
+    {
+        return slots;
+    }
+
+    public void setSlots(final Object slots)
+    {
+        this.slots = slots;
     }
 }
