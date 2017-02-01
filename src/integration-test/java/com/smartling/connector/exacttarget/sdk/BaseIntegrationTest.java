@@ -20,7 +20,7 @@ public class BaseIntegrationTest
         assumeNotNull("Username is not specified", username);
         assumeNotNull("Password is not specified", password);
 
-        this.configuration = new Configuration(username, password);
+        this.configuration = new Configuration(username, password, null);
     }
 
 }

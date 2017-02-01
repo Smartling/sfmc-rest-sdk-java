@@ -12,19 +12,19 @@ public class ConfigurationTest
     @Before
     public void setup()
     {
-        configuration = new Configuration("username", "password");
+        configuration = new Configuration("username", "password", "refreshToken");
     }
 
     @Test(expected = NullPointerException.class)
     public void shouldValidateUsername() throws Exception
     {
-        new Configuration(null, "password");
+        new Configuration(null, "password", null);
     }
 
     @Test(expected = NullPointerException.class)
     public void shouldValidatePassword() throws Exception
     {
-        new Configuration("username", null);
+        new Configuration("username", null, null);
     }
 
     @Test(expected = IllegalArgumentException.class)

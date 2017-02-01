@@ -7,12 +7,14 @@ public class Configuration
 {
     private final String username;
     private final String password;
+    private final String refreshToken;
 
     private int connectTimeoutMillis = 10_000;
     private int readTimeoutMillis = 60_000;
 
-    public Configuration(final String username, final String password)
+    public Configuration(final String username, final String password, final String refreshToken)
     {
+        this.refreshToken = refreshToken;
         this.username = Validate.notEmpty(username, "Username can not be empty");
         this.password = Validate.notEmpty(password, "Password can not be empty");
     }
@@ -56,5 +58,10 @@ public class Configuration
     public String getPassword()
     {
         return password;
+    }
+
+    public String getRefreshToken()
+    {
+        return refreshToken;
     }
 }

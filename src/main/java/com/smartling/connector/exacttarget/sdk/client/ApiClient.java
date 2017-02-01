@@ -3,12 +3,14 @@ package com.smartling.connector.exacttarget.sdk.client;
 import com.smartling.connector.exacttarget.sdk.Configuration;
 import com.smartling.connector.exacttarget.sdk.OAuthRequestInterceptor;
 import com.smartling.connector.exacttarget.sdk.data.AuthData;
+import com.smartling.connector.exacttarget.sdk.data.AuthWithRefreshTokenData;
 import com.smartling.connector.exacttarget.sdk.data.TokenInfo;
 import com.smartling.connector.exacttarget.sdk.rest.api.LoginApi;
 import feign.Feign;
 import feign.Logger;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
 
 public abstract class ApiClient
@@ -24,7 +26,13 @@ public abstract class ApiClient
     {
         this.configuration = configuration;
         this.loginApi = buildApi(LoginApi.class, BASE_AUTH_API_URL);
-        this.tokenInfo = loginApi.getTokenInfo(new AuthData(configuration.getUsername(), configuration.getPassword()));
+        if (StringUtils.isEmpty(configuration.getRefreshToken()))
+        {
+            this.tokenInfo = loginApi.getTokenInfo(new AuthData(configuration.getUsername(), configuration.getPassword()));
+        }else
+        {
+            this.tokenInfo = loginApi.getTokenInfo(new AuthWithRefreshTokenData(configuration.getUsername(), configuration.getPassword(), configuration.getRefreshToken()));
+        }
     }
 
     private <A> A buildApi(final Class<A> apiClass, final String apiBaseUrl)
