@@ -5,14 +5,14 @@ public class AuthWithRefreshTokenData
     private final String clientId;
     private final String clientSecret;
     private final String accessType;
-    private final String refresfToken;
+    private final String refreshToken;
 
-    public AuthWithRefreshTokenData(final String clientId, final String clientSecret, final String accessType, final String refresfToken)
+    public AuthWithRefreshTokenData(final String clientId, final String clientSecret, final String accessType, final String refreshToken)
     {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.accessType = accessType;
-        this.refresfToken = refresfToken;
+        this.refreshToken = refreshToken;
     }
 
     public String getClientId()
@@ -30,8 +30,8 @@ public class AuthWithRefreshTokenData
         return accessType;
     }
 
-    public String getRefresfToken()
+    public String getRefreshToken()
     {
-        return refresfToken;
+        return refreshToken;
     }
 }
