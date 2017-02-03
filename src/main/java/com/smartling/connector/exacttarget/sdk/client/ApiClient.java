@@ -30,7 +30,7 @@ public abstract class ApiClient
             this.tokenInfo = loginApi.getTokenInfo(new AuthData(configuration.getUsername(), configuration.getPassword()));
         }else
         {
-            this.tokenInfo = loginApi.getTokenInfo(new AuthWithRefreshTokenData(configuration.getUsername(), configuration.getPassword(), "online", configuration.getRefreshToken()));
+            this.tokenInfo = loginApi.getTokenInfo(new AuthWithRefreshTokenData(configuration.getUsername(), configuration.getPassword(), "offline", configuration.getRefreshToken()));
         }
     }
 
@@ -53,5 +53,10 @@ public abstract class ApiClient
                     .errorDecoder(new SFCMRestErrorDecoder())
                     .options(configuration.getOptions())
                     .target(apiClass, apiBaseUrl);
+    }
+
+    public String getValidRefreshToken()
+    {
+        return tokenInfo.getRefreshToken();
     }
 }
