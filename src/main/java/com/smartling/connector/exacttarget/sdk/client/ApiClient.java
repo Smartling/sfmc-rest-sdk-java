@@ -7,7 +7,6 @@ import com.smartling.connector.exacttarget.sdk.data.AuthWithRefreshTokenData;
 import com.smartling.connector.exacttarget.sdk.data.TokenInfo;
 import com.smartling.connector.exacttarget.sdk.rest.api.LoginApi;
 import feign.Feign;
-import feign.Logger;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import org.apache.commons.lang3.StringUtils;
@@ -25,24 +24,22 @@ public abstract class ApiClient
     public ApiClient(final Configuration configuration)
     {
         this.configuration = configuration;
-        this.loginApi = buildApi(LoginApi.class, BASE_AUTH_API_URL);
+        this.loginApi = buildApi(LoginApi.class, BASE_AUTH_API_URL, configuration);
         if (StringUtils.isEmpty(configuration.getRefreshToken()))
         {
             this.tokenInfo = loginApi.getTokenInfo(new AuthData(configuration.getUsername(), configuration.getPassword()));
         }else
         {
-            this.tokenInfo = loginApi.getTokenInfo(new AuthWithRefreshTokenData(configuration.getUsername(), configuration.getPassword(), configuration.getRefreshToken()));
+            this.tokenInfo = loginApi.getTokenInfo(new AuthWithRefreshTokenData(configuration.getUsername(), configuration.getPassword(), "online", configuration.getRefreshToken()));
         }
     }
 
-    private <A> A buildApi(final Class<A> apiClass, final String apiBaseUrl)
+    static <A> A buildApi(final Class<A> apiClass, final String apiBaseUrl, final Configuration configuration)
     {
         return Feign.builder()
                     .encoder(new JacksonEncoder())
                     .decoder(new JacksonDecoder())
                     .errorDecoder(new SFCMRestErrorDecoder())
-                    .logger(new Logger.JavaLogger().appendToFile("http.log"))
-                    .logLevel(Logger.Level.FULL)
                     .options(configuration.getOptions())
                     .target(apiClass, apiBaseUrl);
     }
@@ -54,8 +51,6 @@ public abstract class ApiClient
                     .encoder(new JacksonEncoder())
                     .decoder(new JacksonDecoder())
                     .errorDecoder(new SFCMRestErrorDecoder())
-                    .logger(new Logger.JavaLogger().appendToFile("http.log"))
-                    .logLevel(Logger.Level.FULL)
                     .options(configuration.getOptions())
                     .target(apiClass, apiBaseUrl);
     }
