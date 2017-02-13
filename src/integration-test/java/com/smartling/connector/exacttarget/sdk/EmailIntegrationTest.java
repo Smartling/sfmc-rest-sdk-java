@@ -1,6 +1,7 @@
 package com.smartling.connector.exacttarget.sdk;
 
 import com.smartling.connector.exacttarget.sdk.client.EmailClient;
+import com.smartling.connector.exacttarget.sdk.client.LoginClient;
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
 import org.junit.Test;
@@ -12,7 +13,8 @@ public class EmailIntegrationTest extends BaseIntegrationTest
     @Test
     public void testGetClientList()
     {
-        EmailClient emailClient = new EmailClient(configuration);
+        LoginClient loginClient = new LoginClient(configuration);
+        EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
         final Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
 
         assertThat(emails).isNotNull();
@@ -26,8 +28,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         {
             assertThat(emails.getItems().get(0).getModifiedDate().after(emails.getItems().get(1).getModifiedDate()));
         }
-
-
+        
         final Email emailToClone = emailClient.getEmail(emails.getItems().get(0).getId());
         emailToClone.setName(emailToClone.getName()+"(aw)");
         final Email clonedEmail = emailClient.createEmail(emailToClone);
@@ -41,7 +42,8 @@ public class EmailIntegrationTest extends BaseIntegrationTest
     @Test
     public void testGettingFieldWithEmptySorting()
     {
-        EmailClient emailClient = new EmailClient(configuration);
+        LoginClient loginClient = new LoginClient(configuration);
+        EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
 
         final Elements<Email> emails = emailClient.getEmailsList(1, 10, "", "", "");
         assertThat(emails).isNotNull();

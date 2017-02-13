@@ -3,6 +3,7 @@ package com.smartling.connector.exacttarget.sdk.client;
 import com.smartling.connector.exacttarget.sdk.Configuration;
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
+import com.smartling.connector.exacttarget.sdk.data.TokenInfo;
 import com.smartling.connector.exacttarget.sdk.data.request.GetListRequestBuilder;
 import com.smartling.connector.exacttarget.sdk.rest.SFMCRestException;
 import com.smartling.connector.exacttarget.sdk.rest.api.EmailApi;
@@ -14,9 +15,9 @@ public class EmailClient extends ApiClient
     public static final int MAX_RETRY = 5;
     private EmailApi emailApi;
 
-    public EmailClient(final Configuration configuration)
+    public EmailClient(final Configuration configuration, TokenInfo tokenInfo)
     {
-        super(configuration);
+        super(configuration, tokenInfo);
         emailApi = buildApiWithOAuthAuthentication(EmailApi.class, BASE_API_URL);
     }
 
