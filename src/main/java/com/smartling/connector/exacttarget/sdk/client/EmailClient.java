@@ -33,6 +33,8 @@ public class EmailClient extends ApiClient
 
     public Email createEmail(Email translatedEmail)
     {
+        translatedEmail.setId(null);
+        translatedEmail.setObjectID(null);
         for (int i=0; i< MAX_RETRY; i++)
         {
             translatedEmail.setCustomerKey(UUID.randomUUID().toString());
