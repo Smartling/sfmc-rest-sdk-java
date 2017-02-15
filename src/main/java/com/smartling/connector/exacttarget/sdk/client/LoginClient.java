@@ -25,7 +25,8 @@ public class LoginClient
         if (StringUtils.isEmpty(configuration.getRefreshToken()))
         {
             return loginApi.getTokenInfo(new AuthData(configuration.getUsername(), configuration.getPassword()));
-        }else
+        }
+        else
         {
             return loginApi.getTokenInfo(new AuthWithRefreshTokenData(configuration.getUsername(), configuration.getPassword(), "offline", configuration.getRefreshToken()));
         }

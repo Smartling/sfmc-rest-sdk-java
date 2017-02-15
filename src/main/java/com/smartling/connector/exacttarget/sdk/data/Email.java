@@ -6,8 +6,11 @@ import java.util.Date;
 
 public class Email
 {
+    @JsonProperty (access = JsonProperty.Access.WRITE_ONLY)
     private String id;
+    @JsonProperty (access = JsonProperty.Access.WRITE_ONLY)
     private String customerKey;
+    @JsonProperty (access = JsonProperty.Access.WRITE_ONLY)
     private String objectID;
     private String contentType;
     private AssetType assetType;

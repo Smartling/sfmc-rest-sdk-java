@@ -15,11 +15,11 @@ public class EmailIntegrationTest extends BaseIntegrationTest
     {
         LoginClient loginClient = new LoginClient(configuration);
         EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
-        final Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
 
         assertThat(emails).isNotNull();
         assertThat(emails.getPage()).isEqualTo(1);
-      //  assertThat(emails.getPageSize()).isEqualTo(10);
+        assertThat(emails.getPageSize()).isLessThanOrEqualTo(10);
         assertThat(emails.getCount()).isGreaterThan(0);
         assertThat(emails.getItems()).isNotEmpty();
         assertThat(emails.getItems().get(0)).isNotNull();
@@ -28,7 +28,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         {
             assertThat(emails.getItems().get(0).getModifiedDate().after(emails.getItems().get(1).getModifiedDate()));
         }
-        
+
         final Email emailToClone = emailClient.getEmail(emails.getItems().get(0).getId());
         emailToClone.setName(emailToClone.getName()+"(aw)");
         final Email clonedEmail = emailClient.createEmail(emailToClone);
