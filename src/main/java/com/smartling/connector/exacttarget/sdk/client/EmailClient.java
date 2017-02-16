@@ -7,6 +7,8 @@ import com.smartling.connector.exacttarget.sdk.data.TokenInfo;
 import com.smartling.connector.exacttarget.sdk.data.request.GetListRequestBuilder;
 import com.smartling.connector.exacttarget.sdk.rest.SFMCRestException;
 import com.smartling.connector.exacttarget.sdk.rest.api.EmailApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
@@ -14,6 +16,7 @@ public class EmailClient extends ApiClient
 {
     public static final int MAX_RETRY = 5;
     private EmailApi emailApi;
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailClient.class);
 
     public EmailClient(final Configuration configuration, TokenInfo tokenInfo)
     {
@@ -41,10 +44,15 @@ public class EmailClient extends ApiClient
             try
             {
                 return emailApi.createEmail(translatedEmail);
-            }catch (SFMCRestException ex)
+            }
+            catch (SFMCRestException ex)
             {
                 if (ex.getMessage().contains("Customer Key must be unique"))
+                {
+                    LOGGER.info("Customer Key is not unique {}", translatedEmail.getCustomerKey());
                     continue;
+                }
+                LOGGER.info("Failed to create email", ex);
                 throw ex;
             }
         }

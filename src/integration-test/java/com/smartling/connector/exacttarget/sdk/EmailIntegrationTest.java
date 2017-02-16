@@ -15,7 +15,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
     {
         LoginClient loginClient = new LoginClient(configuration);
         EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
-        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, "10th", "modifiedDate", "DESC");
 
         assertThat(emails).isNotNull();
         assertThat(emails.getPage()).isEqualTo(1);
@@ -31,9 +31,12 @@ public class EmailIntegrationTest extends BaseIntegrationTest
 
         final Email emailToClone = emailClient.getEmail(emails.getItems().get(0).getId());
         emailToClone.setName(emailToClone.getName()+"(aw)");
+    //    emailToClone.setThumbnailHtml(emailToClone.getThumbnailHtml().replaceAll("Update Profile", "X_0_o_X"));
+        emailToClone.getViews().getHtml().setContent(emailToClone.getViews().getHtml().getContent().replaceAll("Update Profile", "X_0_o_X"));
+
         final Email clonedEmail = emailClient.createEmail(emailToClone);
 //        assertThat(emailClient.getEmailsList(1, 10, clonedEmail.getName(), "modifiedDate", "DESC").getCount()).isGreaterThan(1);
-        clonedEmail.setName("UnIqUe_Name");
+        clonedEmail.setThumbnailHtml(clonedEmail.getThumbnailHtml().replaceAll("Update Profile", "X_0_o_X"));
         emailClient.updateEmail(clonedEmail.getId(), clonedEmail);
         assertThat(emailClient.getEmailsList(1, 10, "UnIqUe_Name", "modifiedDate", "DESC").getItems().get(0).getId()).isEqualTo(clonedEmail.getId());
         emailClient.deleteEmail(clonedEmail.getId());
