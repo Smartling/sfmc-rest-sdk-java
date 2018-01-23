@@ -15,7 +15,7 @@ public class Template
     private String memberId;
     private Object status;
     private String thumbnailUrl;
-    private String category;
+    private Object category;
 
     public AssetType getAssetType()
     {
@@ -147,12 +147,12 @@ public class Template
         this.thumbnailUrl = thumbnailUrl;
     }
 
-    public String getCategory()
+    public Object getCategory()
     {
         return category;
     }
 
-    public void setCategory(final String category)
+    public void setCategory(final Object category)
     {
         this.category = category;
     }
