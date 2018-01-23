@@ -24,5 +24,5 @@ public interface EmailApi
     Void updateEmail(@Param("id") String id, Email clonedEmail);
 
     @RequestLine("DELETE /asset/v1/assets/{id}")
-    Void deleteEmail(@Param("id") String id);
+    String deleteEmail(@Param("id") String id);
 }

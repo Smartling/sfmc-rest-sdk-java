@@ -64,8 +64,8 @@ public class EmailClient extends ApiClient
         emailApi.updateEmail(id, email);
     }
 
-    public void deleteEmail(String id)
+    public String deleteEmail(String id)
     {
-        emailApi.deleteEmail(id);
+        return emailApi.deleteEmail(id);
     }
 }
