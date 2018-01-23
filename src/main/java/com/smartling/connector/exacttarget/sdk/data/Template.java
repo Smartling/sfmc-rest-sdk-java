@@ -2,6 +2,7 @@ package com.smartling.connector.exacttarget.sdk.data;
 
 public class Template
 {
+    private Long id;
     private AssetType assetType;
     private String name;
     private String content;
@@ -16,6 +17,16 @@ public class Template
     private Object status;
     private String thumbnailUrl;
     private Object category;
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(final Long id)
+    {
+        this.id = id;
+    }
 
     public AssetType getAssetType()
     {
