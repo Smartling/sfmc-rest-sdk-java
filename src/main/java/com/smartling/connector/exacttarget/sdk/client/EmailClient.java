@@ -3,6 +3,7 @@ package com.smartling.connector.exacttarget.sdk.client;
 import com.smartling.connector.exacttarget.sdk.Configuration;
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
+import com.smartling.connector.exacttarget.sdk.data.Preview;
 import com.smartling.connector.exacttarget.sdk.data.TokenInfo;
 import com.smartling.connector.exacttarget.sdk.data.request.GetListRequestBuilder;
 import com.smartling.connector.exacttarget.sdk.rest.SFMCRestException;
@@ -32,6 +33,11 @@ public class EmailClient extends ApiClient
     public Email getEmail(String id)
     {
         return emailApi.getEmail(id);
+    }
+
+    public Preview getEmailPreview(String id)
+    {
+        return emailApi.getEmailPreview(id);
     }
 
     public Email createEmail(Email translatedEmail)

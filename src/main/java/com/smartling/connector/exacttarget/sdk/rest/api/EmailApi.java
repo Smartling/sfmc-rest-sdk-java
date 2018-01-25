@@ -2,6 +2,7 @@ package com.smartling.connector.exacttarget.sdk.rest.api;
 
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
+import com.smartling.connector.exacttarget.sdk.data.Preview;
 import com.smartling.connector.exacttarget.sdk.data.request.GetListRequest;
 import feign.Headers;
 import feign.Param;
@@ -14,6 +15,9 @@ public interface EmailApi
 
     @RequestLine("GET /asset/v1/assets/{id}")
     Email getEmail(@Param("id") String id);
+
+    @RequestLine("GET /asset/v1/content/assets/{id}/channelviews/html")
+    Preview getEmailPreview(@Param("id") String id);
 
     @RequestLine("POST /asset/v1/assets/")
     @Headers ("Content-Type: application/json")
