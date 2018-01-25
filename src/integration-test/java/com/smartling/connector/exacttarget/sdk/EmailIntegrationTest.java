@@ -36,7 +36,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         clonedEmail.setName("UnIqUe_Name");
         emailClient.updateEmail(clonedEmail.getId(), clonedEmail);
         assertThat(emailClient.getEmailsList(1, 10, "UnIqUe_Name", "modifiedDate", "DESC").getItems().get(0).getId()).isEqualTo(clonedEmail.getId());
-        assertThat(emailClient.getEmailPreview(emailToClone.getId())).isNotNull();
+        assertThat(emailClient.getEmailPreview(clonedEmail.getId())).isNotNull();
         String deleteStatus = emailClient.deleteEmail(clonedEmail.getId());
         assertThat(deleteStatus.equalsIgnoreCase("OK"));
     }
