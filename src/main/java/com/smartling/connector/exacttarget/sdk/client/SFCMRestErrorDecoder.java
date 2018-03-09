@@ -33,7 +33,7 @@ public class SFCMRestErrorDecoder implements ErrorDecoder
             return new SFMCRestNotFoundException(message);
         }
 
-        String message = String.format("Eloqua API responded with HTTP %s: %s. Details: %s", response.status(), response.reason(), responseBody);
+        String message = String.format("Exacttarget API responded with HTTP %s: %s. Details: %s", response.status(), response.reason(), responseBody);
         return new SFMCRestException(message);
     }
 
