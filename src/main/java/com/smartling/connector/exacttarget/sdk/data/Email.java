@@ -31,6 +31,7 @@ public class Email
     private Legacy legacy;
     private Views views;
     private Long modelVersion;
+    private SharingProperties sharingProperties;
 
     public String getId()
     {
@@ -260,5 +261,15 @@ public class Email
     public void setThumbnailImage(final String thumbnailImage)
     {
         this.thumbnailImage = thumbnailImage;
+    }
+
+    public SharingProperties getSharingProperties()
+    {
+        return sharingProperties;
+    }
+
+    public void setSharingProperties(SharingProperties sharingProperties)
+    {
+        this.sharingProperties = sharingProperties;
     }
 }
