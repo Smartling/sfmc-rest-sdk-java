@@ -5,6 +5,8 @@ public class Text
     private Object options;
     private String content;
     private Integer modelVersion;
+    private Object data;
+    private Object generateFrom;
 
     public Object getOptions()
     {
@@ -34,5 +36,25 @@ public class Text
     public void setModelVersion(final Integer modelVersion)
     {
         this.modelVersion = modelVersion;
+    }
+
+    public Object getData()
+    {
+        return data;
+    }
+
+    public void setData(Object data)
+    {
+        this.data = data;
+    }
+
+    public Object getGenerateFrom()
+    {
+        return generateFrom;
+    }
+
+    public void setGenerateFrom(Object generateFrom)
+    {
+        this.generateFrom = generateFrom;
     }
 }
