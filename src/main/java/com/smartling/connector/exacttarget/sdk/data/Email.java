@@ -30,6 +30,7 @@ public class Email
     private Options options;
     private Legacy legacy;
     private Views views;
+    private Object meta;
     private Long modelVersion;
     private SharingProperties sharingProperties;
 
@@ -271,5 +272,15 @@ public class Email
     public void setSharingProperties(SharingProperties sharingProperties)
     {
         this.sharingProperties = sharingProperties;
+    }
+
+    public Object getMeta()
+    {
+        return meta;
+    }
+
+    public void setMeta(Object meta)
+    {
+        this.meta = meta;
     }
 }

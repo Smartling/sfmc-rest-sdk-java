@@ -8,6 +8,7 @@ public class Html
     private String thumbnailHtml;
     private Template template;
     private Object slots;
+    private Object data;
 
     public Object getOptions()
     {
@@ -67,5 +68,15 @@ public class Html
     public void setSlots(final Object slots)
     {
         this.slots = slots;
+    }
+
+    public Object getData()
+    {
+        return data;
+    }
+
+    public void setData(Object data)
+    {
+        this.data = data;
     }
 }
