@@ -33,6 +33,7 @@ public class Email
     private Object meta;
     private Long modelVersion;
     private SharingProperties sharingProperties;
+    private AssetData data;
 
     public String getId()
     {
@@ -282,5 +283,15 @@ public class Email
     public void setMeta(Object meta)
     {
         this.meta = meta;
+    }
+
+    public AssetData getData()
+    {
+        return data;
+    }
+
+    public void setData(AssetData data)
+    {
+        this.data = data;
     }
 }
