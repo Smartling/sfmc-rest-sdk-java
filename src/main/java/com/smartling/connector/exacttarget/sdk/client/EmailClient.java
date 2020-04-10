@@ -22,7 +22,7 @@ public class EmailClient extends ApiClient
     public EmailClient(final Configuration configuration, TokenInfo tokenInfo)
     {
         super(configuration, tokenInfo);
-        emailApi = buildApiWithOAuthAuthentication(EmailApi.class, BASE_API_URL);
+        emailApi = buildApiWithOAuthAuthentication(EmailApi.class, tokenInfo.getRestApiHost());
     }
 
     public Elements<Email> getEmailsList(int page, int pageSize, String searchTerm, String sortField, String sortDirection)

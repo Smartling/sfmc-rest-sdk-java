@@ -1,5 +1,6 @@
 package com.smartling.connector.exacttarget.sdk;
 
+import com.smartling.connector.exacttarget.sdk.client.LoginApiVersion;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,19 +13,19 @@ public class ConfigurationTest
     @Before
     public void setup()
     {
-        configuration = new Configuration("username", "password", "refreshToken");
+        configuration = new Configuration("username", "password", "refreshToken", null , LoginApiVersion.V1);
     }
 
     @Test(expected = NullPointerException.class)
     public void shouldValidateUsername() throws Exception
     {
-        new Configuration(null, "password", null);
+        new Configuration(null, "password", null, null, LoginApiVersion.V1);
     }
 
     @Test(expected = NullPointerException.class)
     public void shouldValidatePassword() throws Exception
     {
-        new Configuration("username", null, null);
+        new Configuration("username", null, null, null, LoginApiVersion.V1);
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -1,11 +1,11 @@
-package com.smartling.connector.exacttarget.sdk.data;
+package com.smartling.connector.exacttarget.sdk.data.auth.v1;
 
-public class AuthData
+public class AuthDataV1
 {
-    private String clientId;
-    private String clientSecret;
+    private final String clientId;
+    private final String clientSecret;
 
-    public AuthData(final String clientId, final String clientSecret)
+    public AuthDataV1(String clientId, String clientSecret)
     {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
