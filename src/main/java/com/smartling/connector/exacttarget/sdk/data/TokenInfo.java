@@ -4,8 +4,22 @@ public class TokenInfo
 {
     private String accessToken;
     private String refreshToken;
+    private String restApiHost;
     private Long expiresIn;
     public static final String TOKEN_TYPE = "Bearer";
+
+    public TokenInfo()
+    {
+
+    }
+
+    public TokenInfo(String accessToken, String refreshToken, String restApiHost, Long expiresIn)
+    {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.restApiHost = restApiHost;
+        this.expiresIn = expiresIn;
+    }
 
     public String getAccessToken()
     {
@@ -35,5 +49,15 @@ public class TokenInfo
     public void setRefreshToken(final String refreshToken)
     {
         this.refreshToken = refreshToken;
+    }
+
+    public String getRestApiHost()
+    {
+        return restApiHost;
+    }
+
+    public void setRestApiHost(String restApiHost)
+    {
+        this.restApiHost = restApiHost;
     }
 }

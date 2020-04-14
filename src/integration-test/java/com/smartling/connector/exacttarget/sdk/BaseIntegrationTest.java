@@ -1,5 +1,6 @@
 package com.smartling.connector.exacttarget.sdk;
 
+import com.smartling.connector.exacttarget.sdk.client.LoginApiVersion;
 import org.junit.Before;
 
 import static org.junit.Assume.assumeNotNull;
@@ -20,7 +21,7 @@ public class BaseIntegrationTest
         assumeNotNull("Username is not specified", username);
         assumeNotNull("Password is not specified", password);
 
-        this.configuration = new Configuration(username, password, null);
+        this.configuration = new Configuration(username, password, null, null, LoginApiVersion.V1);
     }
 
 }
