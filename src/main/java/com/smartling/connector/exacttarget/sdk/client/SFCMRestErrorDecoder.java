@@ -29,7 +29,7 @@ public class SFCMRestErrorDecoder implements ErrorDecoder
 
         if (response.status() == 404)
         {
-            String message = String.format("Authentication failed with HTTP %s: %s. Details: %s", response.status(), response.reason(), responseBody);
+            String message = String.format("Asset not found HTTP %s: %s. Details: %s", response.status(), response.reason(), responseBody);
             return new SFMCRestNotFoundException(message);
         }
 
