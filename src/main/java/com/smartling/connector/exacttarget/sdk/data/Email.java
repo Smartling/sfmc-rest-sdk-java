@@ -28,7 +28,7 @@ public class Email
     private String thumbnailUrl;
     private Category category;
     private Options options;
-    private Legacy legacy;
+    private LegacyData legacyData;
     private Views views;
     private Object meta;
     private Long modelVersion;
@@ -215,14 +215,14 @@ public class Email
         this.options = options;
     }
 
-    public Legacy getLegacy()
+    public LegacyData getLegacyData()
     {
-        return legacy;
+        return legacyData;
     }
 
-    public void setLegacy(final Legacy legacy)
+    public void setLegacyData(final LegacyData legacyData)
     {
-        this.legacy = legacy;
+        this.legacyData = legacyData;
     }
 
     public Views getViews()

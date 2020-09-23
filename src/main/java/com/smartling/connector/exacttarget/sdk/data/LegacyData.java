@@ -1,6 +1,6 @@
 package com.smartling.connector.exacttarget.sdk.data;
 
-public class Legacy
+public class LegacyData
 {
     private String legacyId;
     private String legacyKey;
