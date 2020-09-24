@@ -1,16 +1,9 @@
 package com.smartling.connector.exacttarget.sdk.data;
 
+import lombok.Data;
+
+@Data
 public class Preview
 {
-    private String compiled;
-
-    public String getCompiled()
-    {
-        return compiled;
-    }
-
-    public void setCompiled(final String compiled)
-    {
-        this.compiled = compiled;
-    }
+    private PreviewMessage message;
 }

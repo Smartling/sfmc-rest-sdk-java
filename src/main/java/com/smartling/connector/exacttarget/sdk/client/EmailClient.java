@@ -3,22 +3,20 @@ package com.smartling.connector.exacttarget.sdk.client;
 import com.smartling.connector.exacttarget.sdk.Configuration;
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
-import com.smartling.connector.exacttarget.sdk.data.EmailPreview;
 import com.smartling.connector.exacttarget.sdk.data.Preview;
 import com.smartling.connector.exacttarget.sdk.data.TokenInfo;
 import com.smartling.connector.exacttarget.sdk.data.request.GetListRequestBuilder;
 import com.smartling.connector.exacttarget.sdk.rest.SFMCRestException;
 import com.smartling.connector.exacttarget.sdk.rest.api.EmailApi;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.UUID;
 
+@Slf4j
 public class EmailClient extends ApiClient
 {
     public static final int MAX_RETRY = 5;
     private EmailApi emailApi;
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmailClient.class);
 
     public EmailClient(final Configuration configuration, TokenInfo tokenInfo)
     {
@@ -41,14 +39,9 @@ public class EmailClient extends ApiClient
         return emailApi.getEmailPreview(id);
     }
 
-    public EmailPreview getPreviewForEmail(String legacyId)
+    public Preview getEmailPreview(String id, String dataExtensionKey, Long rowId)
     {
-        return emailApi.getPreviewForEmail(legacyId);
-    }
-
-    public EmailPreview getPreviewForEmail(String legacyId, String dataExtensionKey, Long rowId)
-    {
-        return emailApi.getPreviewForEmail(legacyId, dataExtensionKey, rowId);
+        return emailApi.getEmailPreview(id, dataExtensionKey, rowId);
     }
 
     public Email createEmail(Email translatedEmail)
@@ -66,10 +59,10 @@ public class EmailClient extends ApiClient
             {
                 if (ex.getMessage().contains("Customer Key must be unique"))
                 {
-                    LOGGER.info("Customer Key is not unique {}", translatedEmail.getCustomerKey());
+                    log.info("Customer Key is not unique {}", translatedEmail.getCustomerKey());
                     continue;
                 }
-                LOGGER.info("Failed to create email", ex);
+                log.info("Failed to create email", ex);
                 throw ex;
             }
         }

@@ -5,8 +5,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class SharingProperties
+public class PreviewMessage
 {
-    private String sharingType;
-    private List<Long> sharedWith;
+    private PreviewLinks links;
+    private List<PreviewView> views;
 }

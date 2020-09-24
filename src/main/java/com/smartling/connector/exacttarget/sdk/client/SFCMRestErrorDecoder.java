@@ -5,17 +5,15 @@ import com.smartling.connector.exacttarget.sdk.rest.SFMCRestException;
 import com.smartling.connector.exacttarget.sdk.rest.SFMCRestNotFoundException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class SFCMRestErrorDecoder implements ErrorDecoder
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SFCMRestErrorDecoder.class);
-
     @Override
     public Exception decode(final String methodKey, final Response response)
     {
@@ -47,7 +45,7 @@ public class SFCMRestErrorDecoder implements ErrorDecoder
             }
             catch (IOException e)
             {
-                LOGGER.warn("Failed to read response:", e);
+                log.warn("Failed to read response:", e);
                 return null;
             }
         }

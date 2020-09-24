@@ -7,15 +7,17 @@ buildscript {
         }
         dependencies {
             classpath 'org.hibernate.build.gradle:gradle-maven-publish-auth:2.0.1'
-            classpath 'org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:1.0.2'
             classpath 'com.netflix.nebula:gradle-info-plugin:2.2.+'
             classpath 'gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:0.5.2'
         }
     }
 }
 
+plugins {
+    id 'org.unbroken-dome.test-sets' version '2.1.1'
+}
+
 apply plugin: 'java'
-apply plugin: 'org.unbroken-dome.test-sets'
 apply plugin: 'maven-publish'
 apply plugin: 'maven-publish-auth'
 apply plugin: 'jacoco'
@@ -44,7 +46,10 @@ dependencies {
     compile "com.netflix.feign:feign-httpclient:$feignVersion"
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.slf4j:slf4j-api:1.7.21'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.6.0'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.11.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.11.0'
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
     testCompile 'org.assertj:assertj-core:3.5.1'
     testCompile 'junit:junit:4.12'
@@ -52,6 +57,8 @@ dependencies {
     testCompile 'com.jayway.jsonpath:json-path-assert:2.0.0'
     testCompile 'com.github.tomakehurst:wiremock:1.56'
     testCompile 'org.mockito:mockito-core:2.0.86-beta'
+    testCompileOnly 'org.projectlombok:lombok:1.18.10'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
 }
 
 testSets {
@@ -113,8 +120,4 @@ def buildVersion() {
              : '.' + (patchNumber + 1) + '-SNAPSHOT'
 
     return details.lastTag - '.dirty' + suffix;
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.14'
 }

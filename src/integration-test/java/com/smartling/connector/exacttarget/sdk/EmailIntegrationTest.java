@@ -40,8 +40,6 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         final Email updatedEmail = emailClient.getEmail(clonedEmail.getId());
         assertThat(updatedEmail.getName()).isEqualTo(uniqueEmailName);
 
-        assertThat(emailClient.getEmailPreview(clonedEmail.getId())).isNotNull();
-
         String deleteStatus = emailClient.deleteEmail(clonedEmail.getId());
         assertThat(deleteStatus.equalsIgnoreCase("OK"));
     }
@@ -67,6 +65,6 @@ public class EmailIntegrationTest extends BaseIntegrationTest
 
         Email email = emailClient.getEmail(emails.getItems().get(0).getId());
         String legacyEmailId = email.getLegacyData().getLegacyId();
-        assertThat(emailClient.getPreviewForEmail(legacyEmailId).getMessage().getViews().get(0).getContent()).isNotNull();
+        assertThat(emailClient.getEmailPreview(legacyEmailId).getMessage().getViews().get(0).getContent()).isNotNull();
     }
 }

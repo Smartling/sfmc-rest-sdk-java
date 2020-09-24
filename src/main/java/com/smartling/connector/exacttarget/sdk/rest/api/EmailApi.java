@@ -2,7 +2,6 @@ package com.smartling.connector.exacttarget.sdk.rest.api;
 
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
-import com.smartling.connector.exacttarget.sdk.data.EmailPreview;
 import com.smartling.connector.exacttarget.sdk.data.Preview;
 import com.smartling.connector.exacttarget.sdk.data.request.GetListRequest;
 import feign.Headers;
@@ -17,14 +16,11 @@ public interface EmailApi
     @RequestLine("GET /asset/v1/content/assets/{id}")
     Email getEmail(@Param("id") String id);
 
-    @RequestLine("GET /asset/v1/content/assets/{id}/channelviews/html")
+    @RequestLine("POST /guide/v1/emails/{id}/preview?kind=html")
     Preview getEmailPreview(@Param("id") String id);
 
-    @RequestLine("POST /guide/v1/emails/{legacyId}/preview?kind=html")
-    EmailPreview getPreviewForEmail(@Param("legacyId") String legacyId);
-
-    @RequestLine("POST /guide/v1/emails/{legacyId}/dataExtension/{dataExtensionKey}/row/{rowId}/preview?kind=html")
-    EmailPreview getPreviewForEmail(@Param("legacyId") String legacyId, @Param("dataExtensionKey") String dataExtensionKey, @Param("rowId") Long rowId);
+    @RequestLine("POST /guide/v1/emails/{id}/dataExtension/{dataExtensionKey}/row/{rowId}/preview?kind=html")
+    Preview getEmailPreview(@Param("id") String id, @Param("dataExtensionKey") String dataExtensionKey, @Param("rowId") Long rowId);
 
     @RequestLine("POST /asset/v1/content/assets")
     @Headers ("Content-Type: application/json")
