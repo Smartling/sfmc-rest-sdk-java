@@ -27,7 +27,7 @@ public class GetListRequestBuilder
     {
         final SimpleIntOperand anyEmail = new SimpleIntOperand("assetType.id", "in", new int[]{207, 208, 209});
 
-        ComplexOperand toplvl = new ComplexOperand(anyEmail, "AND", new SimpleOperand("name", "contains", searchTerm));
+        ComplexOperand toplvl = new ComplexOperand(anyEmail, "AND", new SimpleOperand("name", "like", searchTerm));
         return new Query(toplvl);
     }
 }
