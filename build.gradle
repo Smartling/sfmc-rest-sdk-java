@@ -94,20 +94,13 @@ ext {
     branch = project.hasProperty('branch') ? project.getProperty('branch') : project.scminfo.branch
 }
 
-task prepareSonarConfig(type: Copy) {
-    doFirst {
-        logger.info("Current branch is '$branch'")
+sonarqube {
+    properties {
+        // See https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+Gradle
+        // TODO: Sonar configuration goes here, e.g.:
+        property "sonar.projectKey", "${project.group}:${rootProject.name}-${project.name}"
+        property "sonar.projectName", "${project.description}"
     }
-
-    from 'sonar-project.template.properties'
-    into '.'
-
-    rename { String fileName ->
-        fileName.replace('.template', '')
-    }
-
-    // Want to support both plain "master" and full-qualified "refs/origin/master"
-    expand(analysisMode: branch == 'master' || branch.endsWith('/master') ? 'publish' : 'preview')
 }
 
 def buildVersion() {
