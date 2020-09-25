@@ -20,7 +20,7 @@ public interface EmailApi
     Preview getEmailPreview(@Param("id") String id);
 
     @RequestLine("POST /guide/v1/emails/{id}/dataExtension/{dataExtensionKey}/row/{rowId}/preview?kind=html")
-    Preview getEmailPreview(@Param("id") String id, @Param("dataExtensionKey") String dataExtensionKey, @Param("rowId") Long rowId);
+    Preview getEmailPreview(@Param("id") String id, @Param("dataExtensionKey") String dataExtensionKey, @Param("rowId") String rowId);
 
     @RequestLine("POST /asset/v1/content/assets")
     @Headers ("Content-Type: application/json")

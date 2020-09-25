@@ -39,7 +39,7 @@ public class EmailClient extends ApiClient
         return emailApi.getEmailPreview(id);
     }
 
-    public Preview getEmailPreview(String id, String dataExtensionKey, Long rowId)
+    public Preview getEmailPreview(String id, String dataExtensionKey, String rowId)
     {
         return emailApi.getEmailPreview(id, dataExtensionKey, rowId);
     }
