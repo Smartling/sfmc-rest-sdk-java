@@ -1,5 +1,8 @@
 package com.smartling.connector.exacttarget.sdk.data.request;
 
+import lombok.Getter;
+
+@Getter
 public class SimpleIntOperand implements LogicalOperand
 {
     private final String property;
@@ -13,25 +16,5 @@ public class SimpleIntOperand implements LogicalOperand
         this.simpleOperator = simpleOperator;
         this.value = value;
         this.valueType = "int";
-    }
-
-    public String getProperty()
-    {
-        return property;
-    }
-
-    public String getSimpleOperator()
-    {
-        return simpleOperator;
-    }
-
-    public String getValueType()
-    {
-        return valueType;
-    }
-
-    public int[] getValue()
-    {
-        return value;
     }
 }

@@ -1,7 +1,9 @@
 package com.smartling.connector.exacttarget.sdk.data.auth.v2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
+@Getter
 public class AuthDataV2
 {
     @JsonProperty("client_id")
@@ -15,20 +17,5 @@ public class AuthDataV2
     {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
-    }
-
-    public String getClientId()
-    {
-        return clientId;
-    }
-
-    public String getClientSecret()
-    {
-        return clientSecret;
-    }
-
-    public String getGrantType()
-    {
-        return grantType;
     }
 }

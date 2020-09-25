@@ -10,14 +10,12 @@ import com.smartling.connector.exacttarget.sdk.data.TokenInfo;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
-import org.slf4j.LoggerFactory;
 
 public abstract class ApiClient
 {
     public static final String V1_AUTH_API_URL = "https://auth.exacttargetapis.com";
     public static final String V1_API_URL = "https://www.exacttargetapis.com";
 
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ApiClient.class);
     private Configuration configuration;
     private final TokenInfo tokenInfo;
 

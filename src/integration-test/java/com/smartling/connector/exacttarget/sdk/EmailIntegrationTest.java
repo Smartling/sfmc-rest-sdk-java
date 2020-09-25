@@ -4,6 +4,7 @@ import com.smartling.connector.exacttarget.sdk.client.EmailClient;
 import com.smartling.connector.exacttarget.sdk.client.LoginClient;
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,6 +14,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
     @Test
     public void testGetClientList()
     {
+        String uniqueEmailName = "UnIqUe_Name" + RandomStringUtils.randomAlphabetic(2);
         LoginClient loginClient = new LoginClient(configuration);
         EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
         Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
@@ -32,11 +34,12 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         final Email emailToClone = emailClient.getEmail(emails.getItems().get(0).getId());
         emailToClone.setName(emailToClone.getName()+"(aw)");
         final Email clonedEmail = emailClient.createEmail(emailToClone);
-//        assertThat(emailClient.getEmailsList(1, 10, clonedEmail.getName(), "modifiedDate", "DESC").getCount()).isGreaterThan(1);
-        clonedEmail.setName("UnIqUe_Name");
+
+        clonedEmail.setName(uniqueEmailName);
         emailClient.updateEmail(clonedEmail.getId(), clonedEmail);
-        assertThat(emailClient.getEmailsList(1, 10, "UnIqUe_Name", "modifiedDate", "DESC").getItems().get(0).getId()).isEqualTo(clonedEmail.getId());
-        assertThat(emailClient.getEmailPreview(clonedEmail.getId())).isNotNull();
+        final Email updatedEmail = emailClient.getEmail(clonedEmail.getId());
+        assertThat(updatedEmail.getName()).isEqualTo(uniqueEmailName);
+
         String deleteStatus = emailClient.deleteEmail(clonedEmail.getId());
         assertThat(deleteStatus.equalsIgnoreCase("OK"));
     }
@@ -49,5 +52,19 @@ public class EmailIntegrationTest extends BaseIntegrationTest
 
         final Elements<Email> emails = emailClient.getEmailsList(1, 10, "", "", "");
         assertThat(emails).isNotNull();
+    }
+
+    @Test
+    public void testShouldGetPreviewForEmail()
+    {
+        LoginClient loginClient = new LoginClient(configuration);
+        EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
+
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
+        assertThat(emails.getItems().size()).isGreaterThan(0);
+
+        Email email = emailClient.getEmail(emails.getItems().get(0).getId());
+        String legacyEmailId = email.getLegacyData().getLegacyId();
+        assertThat(emailClient.getEmailPreview(legacyEmailId).getMessage().getViews().get(0).getContent()).isNotNull();
     }
 }

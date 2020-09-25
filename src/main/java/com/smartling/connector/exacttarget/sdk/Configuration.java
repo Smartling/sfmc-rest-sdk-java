@@ -3,9 +3,11 @@ package com.smartling.connector.exacttarget.sdk;
 import com.smartling.connector.exacttarget.sdk.client.ApiClient;
 import com.smartling.connector.exacttarget.sdk.client.LoginApiVersion;
 import feign.Request;
+import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+@Getter
 public class Configuration
 {
     private final String username;
@@ -35,19 +37,9 @@ public class Configuration
         return new Request.Options(connectTimeoutMillis, readTimeoutMillis);
     }
 
-    public int getConnectTimeoutMillis()
-    {
-        return connectTimeoutMillis;
-    }
-
     public void setConnectTimeoutMillis(final int connectTimeoutMillis)
     {
         this.connectTimeoutMillis = validateNotNegative(connectTimeoutMillis);
-    }
-
-    public int getReadTimeoutMillis()
-    {
-        return readTimeoutMillis;
     }
 
     public void setReadTimeoutMillis(final int readTimeoutMillis)
@@ -59,30 +51,5 @@ public class Configuration
     {
         Validate.inclusiveBetween(0, Integer.MAX_VALUE, value);
         return value;
-    }
-
-    public String getUsername()
-    {
-        return username;
-    }
-
-    public String getPassword()
-    {
-        return password;
-    }
-
-    public String getRefreshToken()
-    {
-        return refreshToken;
-    }
-
-    public String getAuthApiHost()
-    {
-        return authApiHost;
-    }
-
-    public LoginApiVersion getLoginApiVersion()
-    {
-        return loginApiVersion;
     }
 }

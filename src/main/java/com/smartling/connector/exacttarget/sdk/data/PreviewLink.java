@@ -3,7 +3,7 @@ package com.smartling.connector.exacttarget.sdk.data;
 import lombok.Data;
 
 @Data
-public class EmailData
+public class PreviewLink
 {
-    private Options options;
+    private String href;
 }

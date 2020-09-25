@@ -1,7 +1,10 @@
 package com.smartling.connector.exacttarget.sdk.data.request;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class GetListRequest
 {
     private final Page page;
@@ -15,25 +18,5 @@ public class GetListRequest
         this.query = query;
         this.sort = sort;
         this.fields = fields;
-    }
-
-    public Page getPage()
-    {
-        return page;
-    }
-
-    public Query getQuery()
-    {
-        return query;
-    }
-
-    public List<Sort> getSort()
-    {
-        return sort;
-    }
-
-    public String[] getFields()
-    {
-        return fields;
     }
 }
