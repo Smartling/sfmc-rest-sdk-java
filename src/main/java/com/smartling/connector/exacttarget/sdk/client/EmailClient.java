@@ -1,6 +1,7 @@
 package com.smartling.connector.exacttarget.sdk.client;
 
 import com.smartling.connector.exacttarget.sdk.Configuration;
+import com.smartling.connector.exacttarget.sdk.data.DefaultPreview;
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
 import com.smartling.connector.exacttarget.sdk.data.Preview;
@@ -42,6 +43,11 @@ public class EmailClient extends ApiClient
     public Preview getEmailPreview(String id, String dataExtensionKey, Integer rowId)
     {
         return emailApi.getEmailPreview(id, dataExtensionKey, rowId);
+    }
+
+    public DefaultPreview getDefaultEmailPreview(String id)
+    {
+        return emailApi.getDefaultEmailPreview(id);
     }
 
     public Email createEmail(Email translatedEmail)

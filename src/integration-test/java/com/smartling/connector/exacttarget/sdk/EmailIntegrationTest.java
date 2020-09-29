@@ -55,7 +55,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
     }
 
     @Test
-    public void testShouldGetPreviewForEmail()
+    public void testShouldGetEmailPreview()
     {
         LoginClient loginClient = new LoginClient(configuration);
         EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
@@ -66,5 +66,17 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         Email email = emailClient.getEmail(emails.getItems().get(0).getId());
         String legacyEmailId = email.getLegacyData().getLegacyId();
         assertThat(emailClient.getEmailPreview(legacyEmailId).getMessage().getViews().get(0).getContent()).isNotNull();
+    }
+
+    @Test
+    public void testShouldGetDefaultEmailPreview()
+    {
+        LoginClient loginClient = new LoginClient(configuration);
+        EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
+
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
+        assertThat(emails.getItems().size()).isGreaterThan(0);
+
+        assertThat(emailClient.getDefaultEmailPreview(emails.getItems().get(0).getId()).getCompiled()).isNotNull();
     }
 }

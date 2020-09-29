@@ -1,5 +1,6 @@
 package com.smartling.connector.exacttarget.sdk.rest.api;
 
+import com.smartling.connector.exacttarget.sdk.data.DefaultPreview;
 import com.smartling.connector.exacttarget.sdk.data.Elements;
 import com.smartling.connector.exacttarget.sdk.data.Email;
 import com.smartling.connector.exacttarget.sdk.data.Preview;
@@ -21,6 +22,9 @@ public interface EmailApi
 
     @RequestLine("POST /guide/v1/emails/{id}/dataExtension/{dataExtensionKey}/row/{rowId}/preview?kind=html")
     Preview getEmailPreview(@Param("id") String id, @Param("dataExtensionKey") String dataExtensionKey, @Param("rowId") Integer rowId);
+
+    @RequestLine("GET /asset/v1/content/assets/{id}/channelviews/html")
+    DefaultPreview getDefaultEmailPreview(@Param("id") String id);
 
     @RequestLine("POST /asset/v1/content/assets")
     @Headers ("Content-Type: application/json")
