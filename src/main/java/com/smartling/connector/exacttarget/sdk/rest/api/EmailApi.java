@@ -21,7 +21,7 @@ public interface EmailApi
     Preview getEmailPreview(@Param("id") String id);
 
     @RequestLine("POST /guide/v1/emails/{id}/dataExtension/{dataExtensionKey}/row/{rowId}/preview?kind=html")
-    Preview getEmailPreview(@Param("id") String id, @Param("dataExtensionKey") String dataExtensionKey, @Param("rowId") Integer rowId);
+    Preview getEmailPreview(@Param("id") String id, @Param("dataExtensionKey") String dataExtensionKey, @Param("rowId") String rowId);
 
     @RequestLine("GET /asset/v1/content/assets/{id}/channelviews/html")
     DefaultPreview getDefaultEmailPreview(@Param("id") String id);
