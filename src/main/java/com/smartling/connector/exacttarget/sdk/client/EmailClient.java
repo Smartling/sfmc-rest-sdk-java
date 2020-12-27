@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.UUID;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 @Slf4j
 public class EmailClient extends ApiClient
 {
@@ -25,9 +27,23 @@ public class EmailClient extends ApiClient
         emailApi = buildApiWithOAuthAuthentication(EmailApi.class, tokenInfo.getRestApiHost());
     }
 
-    public Elements<Email> getEmailsList(int page, int pageSize, String searchTerm, String sortField, String sortDirection)
+    public Elements<Email> getEmailsList(int page, int pageSize, String searchTerm, String categoryId, String sortField, String sortDirection)
     {
-        return emailApi.listEmails(GetListRequestBuilder.build(page, pageSize, searchTerm, sortField, sortDirection));
+        GetListRequestBuilder getListRequestBuilder = GetListRequestBuilder.builder()
+                .page(page, pageSize)
+                .searchTerm(searchTerm)
+                .sort(sortField, sortDirection)
+                .field("name")
+                .field("category")
+                .field("status")
+                .field("modifiedDate");
+
+        if (isBlank(searchTerm))
+        {
+            getListRequestBuilder.categoryId(categoryId);
+        }
+
+        return emailApi.listEmails(getListRequestBuilder.build());
     }
 
     public Email getEmail(String id)

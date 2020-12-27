@@ -17,7 +17,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         String uniqueEmailName = "UnIqUe_Name" + RandomStringUtils.randomAlphabetic(2);
         LoginClient loginClient = new LoginClient(configuration);
         EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
-        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "0", "modifiedDate", "DESC");
 
         assertThat(emails).isNotNull();
         assertThat(emails.getPage()).isEqualTo(1);
@@ -26,22 +26,22 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         assertThat(emails.getItems()).isNotEmpty();
         assertThat(emails.getItems().get(0)).isNotNull();
 
-        if(emails.getCount() > 1)
+        if (emails.getCount() > 1)
         {
-            assertThat(emails.getItems().get(0).getModifiedDate().after(emails.getItems().get(1).getModifiedDate()));
+            assertThat(emails.getItems().get(0).getModifiedDate()).isAfter(emails.getItems().get(1).getModifiedDate());
         }
 
-        final Email emailToClone = emailClient.getEmail(emails.getItems().get(0).getId());
-        emailToClone.setName(emailToClone.getName()+"(aw)");
-        final Email clonedEmail = emailClient.createEmail(emailToClone);
+        Email emailToClone = emailClient.getEmail(emails.getItems().get(0).getId());
+        emailToClone.setName(emailToClone.getName() + "(aw)");
+        Email clonedEmail = emailClient.createEmail(emailToClone);
 
         clonedEmail.setName(uniqueEmailName);
         emailClient.updateEmail(clonedEmail.getId(), clonedEmail);
-        final Email updatedEmail = emailClient.getEmail(clonedEmail.getId());
+        Email updatedEmail = emailClient.getEmail(clonedEmail.getId());
         assertThat(updatedEmail.getName()).isEqualTo(uniqueEmailName);
 
         String deleteStatus = emailClient.deleteEmail(clonedEmail.getId());
-        assertThat(deleteStatus.equalsIgnoreCase("OK"));
+        assertThat(deleteStatus).isEqualToIgnoringCase("OK");
     }
 
     @Test
@@ -50,8 +50,36 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         LoginClient loginClient = new LoginClient(configuration);
         EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
 
-        final Elements<Email> emails = emailClient.getEmailsList(1, 10, "", "", "");
+        final Elements<Email> emails = emailClient.getEmailsList(1, 10, "", "", "",  "");
         assertThat(emails).isNotNull();
+    }
+
+    @Test
+    public void testGetEmailsListWithNotEmptySearchTerm()
+    {
+        String categoryId = "0";
+        String searchTerm = "First";
+        LoginClient loginClient = new LoginClient(configuration);
+        EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
+
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, searchTerm, categoryId, "",  "");
+        assertThat(emails).isNotNull();
+        assertThat(emails.getItems()).isNotEmpty();
+        assertThat(emails.getItems().get(0).getName()).contains(searchTerm);
+        assertThat(emails.getItems().get(0).getCategory().getId()).isNotEqualTo(Integer.valueOf(categoryId));
+    }
+
+    @Test
+    public void testGetEmailsListWithEmptySearchTerm()
+    {
+        String categoryId = "65065";
+        LoginClient loginClient = new LoginClient(configuration);
+        EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
+
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, "", categoryId, "",  "");
+        assertThat(emails).isNotNull();
+        assertThat(emails.getItems()).isNotEmpty();
+        assertThat(emails.getItems().get(0).getCategory().getId()).isEqualTo(Integer.valueOf(categoryId));
     }
 
     @Test
@@ -60,7 +88,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         LoginClient loginClient = new LoginClient(configuration);
         EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
 
-        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "", "modifiedDate", "DESC");
         assertThat(emails.getItems().size()).isGreaterThan(0);
 
         Email email = emailClient.getEmail(emails.getItems().get(0).getId());
@@ -74,7 +102,7 @@ public class EmailIntegrationTest extends BaseIntegrationTest
         LoginClient loginClient = new LoginClient(configuration);
         EmailClient emailClient = new EmailClient(configuration, loginClient.getTokenInfo());
 
-        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "modifiedDate", "DESC");
+        Elements<Email> emails = emailClient.getEmailsList(1, 10, "First", "", "modifiedDate", "DESC");
         assertThat(emails.getItems().size()).isGreaterThan(0);
 
         assertThat(emailClient.getDefaultEmailPreview(emails.getItems().get(0).getId()).getCompiled()).isNotNull();

@@ -10,9 +10,9 @@ public class GetListRequest
     private final Page page;
     private final Query query;
     private final List<Sort> sort;
-    private final String[] fields;
+    private final List<String> fields;
 
-    public GetListRequest(final Page page, final Query query, final List<Sort> sort, final String... fields)
+    public GetListRequest(Page page, Query query, List<Sort> sort, List<String> fields)
     {
         this.page = page;
         this.query = query;
